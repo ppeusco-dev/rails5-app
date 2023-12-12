@@ -16,3 +16,14 @@
 //= require turbolinks
 //= require_tree .
 
+document.addEventListener('DOMContentLoaded', function() {
+  const textarea = document.getElementById('post_content');
+  const counter = document.getElementById('character-count');
+
+  if (textarea && counter) {
+    textarea.addEventListener('input', function() {
+      const charactersRemaining = 280 - textarea.value.length;
+      counter.textContent = charactersRemaining;
+    });
+  }
+});
