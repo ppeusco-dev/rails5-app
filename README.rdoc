@@ -1,28 +1,47 @@
-== README
+# Rails 4 Application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple Rails 4 application serving as a foundation for migration to Rails 5. The application includes three main models: User, Post, and Comment.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+1. **Devise Authentication:**
+   - User authentication is implemented using Devise, providing secure and customizable user registration and login functionality.
 
-* System dependencies
+2. **Bootstrap Styling:**
+   - The application utilizes Bootstrap for styling, ensuring a clean and responsive user interface.
 
-* Configuration
+3. **JavaScript Character Counter:**
+   - A basic JavaScript functionality is implemented to provide a character counter in real-time. This feature is integrated into the Post creation and editing forms, offering users immediate feedback on the character count.
 
-* Database creation
+## Models
 
-* Database initialization
+1. **User:**
+   - Represents users of the application and includes authentication features provided by Devise.
 
-* How to run the test suite
+2. **Post:**
+   - Represents individual posts created by users. Each post may contain text content.
 
-* Services (job queues, cache servers, search engines, etc.)
+3. **Comment:**
+   - Represents comments made on posts. Users can interact by leaving comments on existing posts.
 
-* Deployment instructions
+## Usage
 
-* ...
+1. **Installation:**
+   - Clone the repository to your local machine.
+   - Run `bundle install` to install the required gems.
+   - Set up the database using `rake db:migrate`.
 
+2. **Run the Application:**
+   - Execute `rails server` to start the server.
+   - Visit `http://localhost:3000` in your web browser.
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+3. **Explore and Test:**
+   - Navigate through the application to explore the existing features.
+   - Create new users, posts, and comments.
+   - Test the JavaScript character counter on post creation and editing.
+
+## Next Steps
+
+This Rails 4 application is designed to serve as a starting point for migration to Rails 5. As you explore and interact with the current features, consider the enhancements and updates you'll make during the migration process.
+
+Feel free to customize and build upon this foundation to meet the evolving needs of your application.
