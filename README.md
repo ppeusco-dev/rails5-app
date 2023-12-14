@@ -1,47 +1,64 @@
-# Rails 4 Application
+# Migrating from Rails 4 to Rails 5
 
-This is a simple Rails 4 application serving as a foundation for migration to Rails 5. The application includes three main models: User, Post, and Comment.
+To accomplish this task, we developed a basic application using Ruby v2.7.8 and Rails v4.2.3.11. The application includes three models: User, Post, and Comment. We added the Devise, Bootstrap, and JQuery gems (used for character counting in posts).
 
-## Features
+Next, we will describe the process we followed to migrate it to Rails v5.2.8.1. There are various guides and strategies on the web for this migration, and we'll detail our specific approach.
 
-1. **Devise Authentication:**
-   - User authentication is implemented using Devise, providing secure and customizable user registration and login functionality.
+Before starting the migration, we recommend cloning the application. Perform the work on the copy, and once verified to function correctly, apply the changes to the original.
 
-2. **Bootstrap Styling:**
-   - The application utilizes Bootstrap for styling. Bootstrap styles are specifically applied in the `app/views/posts/index.html.erb` view to ensure a clean and responsive user interface for the posts index.
+A crucial guiding light in this journey is unit testing. It's essential to have broad coverage before starting, and seeing all tests green at the end is an encouraging sign. Additionally, we suggest building a new application with the same Rails version we're targeting and trying scaffolding with some entity.
 
-3. **JavaScript Character Counter:**
-   - A basic JavaScript functionality is implemented to provide a character counter in real-time. This feature is integrated into the Post creation and editing forms, offering users immediate feedback on the character count.
+We used the following tools:
+- **Railsbump:** To verify gem compatibility.
+- **Upgrading Ruby on Rails (Section 9):** Official upgrade guide.
+- **RailsDiff:** Tool to compare changes between Rails versions.
 
-## Models
+## Step 1: Working on the Gemfile
 
-1. **User:**
-   - Represents users of the application and includes authentication features provided by Devise.
+We begin by updating Ruby and Rails gem versions to v5.2.8.1 (the latest version of 5.x). Before running `bundle install /update`, we delete the Gemfile.lock file and ensure the correct bundler version, depending on the Ruby version. We compare our Gemfile with the new application or RailsDiff, resulting in a Gemfile for a standard Rails 5 app, plus the inherited gems from our application.
 
-2. **Post:**
-   - Represents individual posts created by users. Each post may contain text content.
+Rails 5 includes Puma as the default server. Resolving issues that may arise with dependencies is crucial at this stage.
 
-3. **Comment:**
-   - Represents comments made on posts. Users can interact by leaving comments on existing posts.
+## Step 2: Updating Files
 
-## Usage
+In this stage, necessary files need to be added and updated. It can be an extensive and complex task, but it's crucial.
 
-1. **Installation:**
-   - Clone the repository to your local machine.
-   - Run `bundle install` to install the required gems.
-   - Set up the database using `rake db:migrate`.
+### Automatic Option: `rails app:update`
 
-2. **Run the Application:**
-   - Execute `rails server` to start the server.
-   - Visit `http://localhost:3000` in your web browser.
+We run the `rails app:update` command, which will automatically make various changes, such as updating the Rails version in key files, gems in the Gemfile, migrations, models, controllers, and views.
 
-3. **Explore and Test:**
-   - Navigate through the application to explore the existing features.
-   - Create new users, posts, and comments.
-   - Test the JavaScript character counter on post creation and editing.
+**Pros:**
+- Updates the Gemfile with the latest versions of Rails and other dependencies.
+- Automatically applies some common configuration changes.
+- Can save time with standard changes.
 
-## Next Steps
+**Cons:**
+- May break existing code that relies on deprecated functions or changes in Rails 5.
+- Does not update all the code that may be using deprecated APIs. Review deprecation messages afterward.
+- It's better to test in a staging environment first before updating production.
 
-This Rails 4 application is designed to serve as a starting point for migration to Rails 5. As you explore and interact with the current features, consider the enhancements and updates you'll make during the migration process.
+### Manual Option (Chosen in this case)
 
-Feel free to customize and build upon this foundation to meet the evolving needs of your application.
+We chose to do it manually, relying on RailsDiff to identify files to modify, add, and delete. We complemented this with section 9 of the Rails upgrade guide. We modified and added configuration, migration, model, and controller files.
+
+**Pros:**
+- Greater control and understanding of changes.
+- Adaptability to specific application situations.
+- Avoids automatic changes that could break existing code.
+
+**Cons:**
+- More extensive and detailed task.
+
+With the files updated, we move on to the next stage.
+
+## Step 3: Testing the Migrated Application
+
+We bring up the application in development/staging, run the tests, and ensure that all tests pass. This step is crucial to verify that the migration was successful.
+
+This process is a journey that requires attention to detail and patience, but with the right practices, it can be successfully accomplished.
+
+## Github Repositories:
+
+- [Rails4App](https://github.com/ppeusco-dev/rails4-app/tree/main)
+- [Rails5App](https://github.com/ppeusco-dev/rails5-app/tree/main)
+
